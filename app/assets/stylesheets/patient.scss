@@ -1,3 +1,18 @@
 // Place all the styles related to the Patient controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#position_on_page{
+	position: relative;
+	top: 60px;
+    left: 360px;
+}
+
+body{
+	background: #edf0f5;
+}
+
+#navbar navbar-default{
+	background-color: #3a5795;
+}

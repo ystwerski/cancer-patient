@@ -1,0 +1,58 @@
+<div ng-app="app">
+	{{ 1 + 1 }}
+	<div ng-controller="patientCtrl">
+
+
+		<div class="container">
+			<div class="row">
+			<div class="col-md-1">
+					<%= form_tag patient_path(@patient.id), :method => :delete do %>
+					<%= submit_tag "Delete Profile", :class => "btn btn-primary", %>
+					<% end %>
+				</div>
+				<div class="col-md-8 col-md-offset-1">
+					<h3>Name: <small><%= @patient.first_name %> <%= @patient.last_name %></small></h3>
+				</div>
+			</div>
+		</div>
+
+
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<h3>Date of Birth: <small><%= @patient.date_of_birth %></small></h3>
+				</div>
+			</div>
+		</div>
+
+		<% @cancers.each do |cancer| %>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-2">
+					<h3>Cancer Type: <small><%= cancer.cancer_type %></small></h3>
+				</div>
+				<div class="col-md-4">
+					<h3>Age of Diagnosis: <small><%= cancer.age_of_diagnosis %></small></h3>
+				</div>
+			</div>
+		</div>
+
+		<%end%>
+
+		<br>
+
+		<%= form_tag edit_patient_path(@patient.id), :method => :get do %>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<%= submit_tag "Edit", :class => "btn btn-primary" %>
+				</div>
+			</div>
+		</div>
+
+		<% end %>
+
+	</div>
+</div>

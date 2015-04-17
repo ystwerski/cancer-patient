@@ -8,6 +8,22 @@
 </head>
 <body>
 
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href=<%= patients_path %>>
+        <img alt="Brand" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRjzB-dFa088pzlLO3irkFw8Wj0abMiOID4sTSJH1mXKEoTY7E-zQ" width="20">
+      </a>
+    </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      <li><h3>CancerIQ</h3></li>
+      <li><a href="#">Sign out</a></li>
+      </ul>
+  </div>
+  </div>
+</nav>
+
 	<% flash.each do |name, message| %>
 
 	  	<div class="alert alert-<%= name %> alert-dismissible" role="alert">

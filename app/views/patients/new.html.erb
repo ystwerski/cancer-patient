@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <p>Thank you for creating a new account!
+        <br>Please take a moment to fill out the form. Thank you.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <%= form_tag patients_path do %>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-md-offset-3">
+        <%= label_tag :First_Name %>
+      </div>
+      <div class="col-md-3">
+        <%= label_tag :Last_Name %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-md-offset-3">
+        <%= text_field_tag :first_name %>
+      </div>
+      <div class="col-md-3">
+        <%= text_field_tag :last_name %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-md-offset-3">
+        <%= label_tag :Date_of_Birth %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-md-offset-3">
+        <%= text_field_tag :date_of_birth, nil, :type => :date %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-md-offset-3">
+        <%= label_tag :Cancer_Type %>
+      </div>
+      <div class="col-md-3">
+        <%= label_tag :Age_of_Diagnosis %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-md-offset-3">
+        <%= text_field_tag :cancer_type %>
+      </div>
+      <div class="col-md-3">
+        <%= text_field_tag :age_of_diagnosis, nil, :ng-model => "caution();" %>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-md-offset-3">
+       <%= submit_tag "Submit", :class => "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <% end %>
+
