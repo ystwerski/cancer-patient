@@ -13,10 +13,4 @@ class ApplicationController < ActionController::Base
 		
 	end
 
-	def new_patient?(user)
-		if (user.patient == nil) && (!user.admin) 
-			redirect_to new_patient_path
-		end
-	end
-
 end

@@ -15,17 +15,19 @@ class CancersController < ApplicationController
 	def create
 		cancer_type = params[:cancer_type]
 		age_of_diagnosis = params[:age_of_diagnosis]
-		if current_user.admin == false
-			patient_id = current_user.id
+		if current_user.admin == nil
+			patient_id = current_user.patient.id
 		elsif current_user.admin
 			patient_id = params[:patient_id]
 		end
 
+
 		@cancer = Cancer.create({:cancer_type => cancer_type, :age_of_diagnosis => age_of_diagnosis, :patient_id => patient_id})
 		if !current_user.admin
 		render 'patients/show'
-		end
+		else
 		redirect_to patients_path
+		end
 	end
 
 
@@ -44,8 +46,9 @@ class CancersController < ApplicationController
 		cancer.update({:cancer_type => cancer_type, :age_of_diagnosis => age_of_diagnosis})
 		if !current_user.admin
 		render "patients/show"
-		end
+		else
 		redirect_to patients_path
+		end
 	end
 
 	def destroy
@@ -54,8 +57,9 @@ class CancersController < ApplicationController
 		cancer.destroy
 		if !current_user.admin
 		redirect_to patient_path(current_user.patient.id)
-		end
+		else
 		redirect_to patients_path
+		end
 	end
 
 end

@@ -5,10 +5,12 @@ class PatientsController < ApplicationController
 		if (current_user.patient == nil) && (!current_user.admin) 
 			redirect_to new_patient_path
 		elsif !current_user.admin
-			redirect_to patient_path
+			redirect_to patient_path(@current_user.patient.id)
 		end
-				
+		
 		@patients = Patient.all
+
+
 
 	end
 
@@ -27,14 +29,17 @@ class PatientsController < ApplicationController
 		age_of_diagnosis = params[:age_of_diagnosis]
 
 		@patient = Patient.create({:first_name => first_name, :last_name => last_name, :date_of_birth => date_of_birth})
-
+		
+		if !current_user.admin
 		current_user.update({:patient_id => @patient.id})
+		end
 
 		Cancer.create({:cancer_type => cancer_type, :age_of_diagnosis => age_of_diagnosis, :patient_id => @patient.id})
-		if !current_user.admin
+		if current_user.admin == nil || !current_user.admin
 		redirect_to patient_path(@patient.id)
-		end
+		else
 		redirect_to patients_path
+		end
 	end
 
 	def show
@@ -60,8 +65,9 @@ class PatientsController < ApplicationController
 		@patient.update({:first_name => first_name, :last_name => last_name, :date_of_birth => date_of_birth})
 		if !current_user.admin
 		render 'show'
-		end
+		else
 		redirect_to patients_path
+		end
 	end
 
 	def destroy
@@ -73,8 +79,9 @@ class PatientsController < ApplicationController
 		end
 		if !current_user.admin
 		redirect_to destroy_user_session_path
-		end
+		else
 		redirect_to patients_path
+		end
 
 	end
 
