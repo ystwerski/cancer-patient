@@ -1,0 +1,36 @@
+<%= form_tag cancers_path do %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 col-md-offset-3">
+      <%= label_tag :Cancer_type %>
+    </div>
+    <div class="col-md-3">
+      <%= label_tag :Age_of_Diagnosis %>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 col-md-offset-3">
+      <%= text_field_tag :cancer_type %>
+    </div>
+  <div class="col-md-3">
+      <%= text_field_tag :age_of_diagnosis %>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 col-md-offset-3">
+    <%= hidden_field_tag :patient_id, @patient_id %>
+     <%= submit_tag "Submit", :class => "btn btn-primary" %>
+   </div>
+ </div>
+</div>
+
+<% end %>

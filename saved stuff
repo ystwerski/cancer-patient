@@ -1,3 +1,25 @@
+<div ng-if="boolean">
+
+			<% {{patient.cancers}}.each do |cancer| %>
+
+			<div class="row">
+				<div class="col-md-2"><h4><%= cancer.cancer_type %></h4>
+				</div>
+				<div class="col-md-2"><h4><%= cancer.date_of_diagnosis %></h4>
+				</div>
+			</div>
+
+			</div>
+
+
+
+
+
+
+
+
+
+
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">

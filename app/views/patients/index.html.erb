@@ -1,1 +1,74 @@
-<%= @patient.id %>
+<% @patients.each do |patient| %>
+<br>
+<br>
+<div class="container">
+			<div class="row">
+				<div class="col-md-1">
+					<%= form_tag patient_path(patient.id), :method => :delete do %>
+					<%= submit_tag "Delete Profile", :class => "btn btn-danger" %>
+					<% end %>
+				</div>
+				<div class="col-md-8 col-md-offset-1">
+					<h3>Name: <small><%= patient.first_name %> <%= patient.last_name %></small></h3>
+				</div>
+			</div>
+		</div>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<h3>Date of Birth: <small><%= patient.date_of_birth %></small></h3>
+		</div>
+	</div>
+</div>
+
+<% patient.cancers.each do |cancer| %>
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-2">
+			<h3>Cancer Type: <small><%= cancer.cancer_type %></small></h3>
+		</div>
+		<div class="col-md-4">
+			<h3>Age of Diagnosis: <small><%= cancer.age_of_diagnosis %></small></h3>
+		</div>
+	</div>
+</div>
+
+<br>
+
+<% if patient.cancers.count > 1 %>
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-3">
+			<%= form_tag cancer_path(cancer.id), :method => :delete do %>
+			<%= submit_tag "Delete this cancer", :class => "btn btn-primary" %>
+			<% end %>
+		</div>
+	</div>
+</div>
+<% end %>
+
+
+<br>
+<%end%>
+
+
+<div class="container">
+	<div class="row">
+		<%= form_tag edit_patient_path(patient.id), :method => :get do %>
+		<div class="col-md-3 col-md-offset-2">
+			<%= submit_tag "Edit", :class => "btn btn-primary" %>
+		</div>
+		<% end %>
+		<%= form_tag new_cancer_path, :method => :get do %>
+		<%= hidden_field_tag :patient_id, patient.id %>
+		<div class="col-md-3">
+			<%= submit_tag "Add additional cancer", :class => "btn btn-primary" %>
+			<% end %>
+		</div>
+	</div>
+</div>
+<br>
+<br>
+<% end %>

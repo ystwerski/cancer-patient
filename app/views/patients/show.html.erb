@@ -1,17 +1,16 @@
 <div ng-app="app">
-	{{ 1 + 1 }}
 	<div ng-controller="patientCtrl">
 
 
 		<div class="container">
 			<div class="row">
-			<div class="col-md-1">
-					<%= form_tag patient_path(@patient.id), :method => :delete do %>
-					<%= submit_tag "Delete Profile", :class => "btn btn-primary", %>
+				<div class="col-md-1">
+					<%= form_tag patient_path(current_user.patient.id), :method => :delete do %>
+					<%= submit_tag "Delete Profile", :class => "btn btn-danger" %>
 					<% end %>
 				</div>
 				<div class="col-md-8 col-md-offset-1">
-					<h3>Name: <small><%= @patient.first_name %> <%= @patient.last_name %></small></h3>
+					<h3>Name: <small><%= current_user.patient.first_name %> <%= current_user.patient.last_name %></small></h3>
 				</div>
 			</div>
 		</div>
@@ -21,12 +20,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">
-					<h3>Date of Birth: <small><%= @patient.date_of_birth %></small></h3>
+					<h3>Date of Birth: <small><%= current_user.patient.date_of_birth %></small></h3>
 				</div>
 			</div>
 		</div>
 
-		<% @cancers.each do |cancer| %>
+		<% current_user.patient.cancers.each do |cancer| %>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4 col-md-offset-2">
@@ -38,21 +37,40 @@
 			</div>
 		</div>
 
-		<%end%>
-
 		<br>
 
-		<%= form_tag edit_patient_path(@patient.id), :method => :get do %>
-
+		<% if current_user.patient.cancers.count > 1 %>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-8 col-md-offset-2">
-					<%= submit_tag "Edit", :class => "btn btn-primary" %>
+				<div class="col-md-4 col-md-offset-3">
+					<%= form_tag cancer_path(cancer.id), :method => :delete do %>
+					<%= submit_tag "Delete this cancer", :class => "btn btn-primary" %>
+					<% end %>
+					<% end %>
 				</div>
 			</div>
 		</div>
 
-		<% end %>
+
+		<br>
+		<%end%>
+
+
+		<div class="container">
+			<div class="row">
+				<%= form_tag edit_patient_path(current_user.patient.id), :method => :get do %>
+				<div class="col-md-3 col-md-offset-2">
+					<%= submit_tag "Edit", :class => "btn btn-primary" %>
+				</div>
+				<% end %>
+				<%= form_tag new_cancer_path, :method => :get do %>
+				<div class="col-md-3">
+					<%= submit_tag "Add additional cancer", :class => "btn btn-primary" %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+
 
 	</div>
 </div>

@@ -8,6 +8,7 @@ class PatientsController < ApplicationController
 			redirect_to patient_path
 		end
 				
+		@patients = Patient.all
 
 	end
 
@@ -29,15 +30,15 @@ class PatientsController < ApplicationController
 
 		current_user.update({:patient_id => @patient.id})
 
-		@cancer = Cancer.create({:cancer_type => cancer_type, :age_of_diagnosis => age_of_diagnosis, :patient_id => @patient.id})
-
+		Cancer.create({:cancer_type => cancer_type, :age_of_diagnosis => age_of_diagnosis, :patient_id => @patient.id})
+		if !current_user.admin
 		redirect_to patient_path(@patient.id)
+		end
+		redirect_to patients_path
 	end
 
 	def show
 
-		@patient = Patient.find(params[:id])
-		@cancers = @patient.cancers
 
 	end
 
@@ -54,13 +55,13 @@ class PatientsController < ApplicationController
 		last_name = params[:last_name]
 		date_of_birth = params[:date_of_birth]
 
-		Patient.find(params[:id]).update({:first_name => first_name, :last_name => last_name, :date_of_birth => date_of_birth})
-		
 		@patient = Patient.find(params[:id])
 
-		@cancers = @patient.cancers
+		@patient.update({:first_name => first_name, :last_name => last_name, :date_of_birth => date_of_birth})
+		if !current_user.admin
 		render 'show'
-
+		end
+		redirect_to patients_path
 	end
 
 	def destroy
@@ -70,7 +71,10 @@ class PatientsController < ApplicationController
 		@cancers.each do |cancer|
 			cancer.destroy
 		end
+		if !current_user.admin
 		redirect_to destroy_user_session_path
+		end
+		redirect_to patients_path
 
 	end
 
