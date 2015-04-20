@@ -34,8 +34,10 @@ class PatientsController < ApplicationController
 		current_user.update({:patient_id => @patient.id})
 		end
 
-		Cancer.create({:cancer_type => cancer_type, :age_of_diagnosis => age_of_diagnosis, :patient_id => @patient.id})
-		if current_user.admin == nil || !current_user.admin
+		cancer = Cancer.create({:cancer_type => cancer_type, :age_of_diagnosis => age_of_diagnosis, :patient_id => @patient.id})
+		
+
+		if !current_user.admin
 		redirect_to patient_path(@patient.id)
 		else
 		redirect_to patients_path

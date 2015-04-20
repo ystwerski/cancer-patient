@@ -21,8 +21,11 @@ class CancersController < ApplicationController
 			patient_id = params[:patient_id]
 		end
 
-
 		@cancer = Cancer.create({:cancer_type => cancer_type, :age_of_diagnosis => age_of_diagnosis, :patient_id => patient_id})
+
+				
+
+		
 		if !current_user.admin
 		render 'patients/show'
 		else
